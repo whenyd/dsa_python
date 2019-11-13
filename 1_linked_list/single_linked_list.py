@@ -138,7 +138,7 @@ class SingleLinkedList:
     #     head.next = None
     #     return new_head
 
-    def last_kth_node(self, k):
+    def get_last_node(self, k=1):
         if self.head is None:
             return
 
@@ -196,6 +196,7 @@ class SingleLinkedList:
 
             ptr = ptr.next
 
+        # key
         if list1.next is not None:
             ptr.next = list1
         if list2.next is not None:
@@ -207,22 +208,33 @@ class SingleLinkedList:
         return new_list
 
     def has_ring(self):
-        # todo
-        pass
+        ptr_fast = self.head
+        ptr_low = self.head
+        while ptr_fast is not None and ptr_fast.next is not None:
+            ptr_fast = ptr_fast.next.next
+            ptr_low = ptr_low.next
+            if ptr_fast == ptr_low:
+                return True
+
+        return False
 
     @staticmethod
     def is_intersect(list1, list2):
         """相交, 则在某个结点之后两个链表是一样的, 不会分叉,
         因为分叉结点的next不唯一, 不满足链表定义.
-
-        O(n1+n2)的解法: 尾指针是同一个结点.
-
-        :param list1:
-        :param list2:
-        :return:
         """
-        # todo
-        pass
+        last_node_1 = list1.get_last_node()
+        last_node_1.next = list2.head
+        value = list1.has_ring()
+        last_node_1.next = None
+        return value
+
+    @staticmethod
+    def is_intersect_on(list1, list2):
+        """相交O(n1+n2)的解法: 尾指针是同一个结点."""
+        last_node_1 = list1.get_last_node()
+        last_node_2 = list2.get_last_node()
+        return last_node_1 is last_node_2
 
 
 if __name__ == '__main__':
@@ -238,13 +250,31 @@ if __name__ == '__main__':
     #
     # slist.reverse_by_recursion()
 
-    # node = slist.last_kth_node(2)
+    # merge
+    # slist1 = SingleLinkedList()
+    # slist1.creat_by_insert_tail([1, 2, 4])
+    # slist2 = SingleLinkedList()
+    # slist2.creat_by_insert_tail([1, 3, 4])
+    # slist = SingleLinkedList.merge_list(slist1.head, slist2.head)
+    # slist.print_list()
 
+    # middle
+    # n1 = slist1.middle_node()
+
+    # ring
+    # slist = SingleLinkedList()
+    # slist.creat_by_insert_tail([[0, 1], 2, 3])
+    # print(slist.has_ring())
+    # last = slist.get_last_node()
+    # last_2nd = slist.get_last_node(2)
+    # last.next = last_2nd
+    # print(slist.has_ring())
+
+    # intersect
     slist1 = SingleLinkedList()
-    slist1.creat_by_insert_tail([1, 2, 4])
+    slist1.creat_by_insert_tail([x for x in range(3)][::-1])
     slist2 = SingleLinkedList()
-    slist2.creat_by_insert_tail([1, 3, 4])
-    slist = SingleLinkedList.merge_list(slist1.head, slist2.head)
-    slist.print_list()
-
-    n1 = slist1.middle_node()
+    slist2.creat_by_insert_tail([5, 4, 3])
+    slist2.get_last_node().next = slist1.head
+    print(SingleLinkedList.is_intersect(slist1, slist2))
+    print(SingleLinkedList.is_intersect_on(slist1, slist2))
