@@ -8,7 +8,7 @@ from array_stack import ArrayStack
 
 def cal_simple_expression(exp):
     """只有+-*/四种运算, 运算数为整数, 运算符前后有空格."""
-    end = '<'  # 表达式结束标志, 最低优先级
+    end = '$'  # 表达式结束标志, 最低优先级
     priority = {end: 0, '+': 1, '-': 1, '*': 2, '/': 2}
     operator_func = {'+': add, '-': sub, '*': mul, '/': truediv}
 
@@ -18,12 +18,19 @@ def cal_simple_expression(exp):
     exp = exp.split()
     exp.append(end)  # 添加表达式结束标志以计算最终结果
 
-    for i in exp:
-        if i not in priority.keys():
-            operand.push(int(i))
+    i = 0
+    while i < len(exp):
+        e = exp[i]
+        if e not in priority.keys():
+            operand.push(int(e))
+            i += 1
         else:
-            if operator.is_empty() or priority[i] > priority[operator.top()]:
-                operator.push(i)
+            # 高优先级运算符直接push
+            if operator.is_empty() or priority[e] > priority[operator.top()]:
+                operator.push(e)
+                i += 1
+
+            # 低优先级运算符在下一次循环时处理
             else:
                 func = operator_func[operator.pop()]
                 num1 = operand.pop()
