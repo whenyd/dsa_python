@@ -4,7 +4,7 @@ class Node:
         self.next = next_
 
 
-class SingleLinkedList:
+class SinglyLinkedList:
     def __init__(self):
         self.head = None
 
@@ -115,7 +115,7 @@ class SingleLinkedList:
         # 将head之外的结点作为新链表递归
         # 实际会移动new_list.head到最后一个结点,
         # 而self.head为倒数第二个结点
-        new_list = SingleLinkedList()
+        new_list = SinglyLinkedList()
         new_list.head = self.head.next
         new_list.reverse_by_recursion()
 
@@ -202,7 +202,7 @@ class SingleLinkedList:
         if list2.next is not None:
             ptr.next = list2
 
-        new_list = SingleLinkedList()
+        new_list = SinglyLinkedList()
         new_list.head = head.next
 
         return new_list
@@ -238,7 +238,7 @@ class SingleLinkedList:
 
 
 if __name__ == '__main__':
-    # slist = SingleLinkedList()
+    # slist = SinglyLinkedList()
     # slist.creat_by_insert_tail([1, 2, 3])
     # slist.insert_to_head(4)
 
@@ -251,18 +251,18 @@ if __name__ == '__main__':
     # slist.reverse_by_recursion()
 
     # merge
-    # slist1 = SingleLinkedList()
+    # slist1 = SinglyLinkedList()
     # slist1.creat_by_insert_tail([1, 2, 4])
-    # slist2 = SingleLinkedList()
+    # slist2 = SinglyLinkedList()
     # slist2.creat_by_insert_tail([1, 3, 4])
-    # slist = SingleLinkedList.merge_list(slist1.head, slist2.head)
+    # slist = SinglyLinkedList.merge_list(slist1.head, slist2.head)
     # slist.print_list()
 
     # middle
     # n1 = slist1.middle_node()
 
     # ring
-    # slist = SingleLinkedList()
+    # slist = SinglyLinkedList()
     # slist.creat_by_insert_tail([[0, 1], 2, 3])
     # print(slist.has_ring())
     # last = slist.get_last_node()
@@ -271,10 +271,10 @@ if __name__ == '__main__':
     # print(slist.has_ring())
 
     # intersect
-    slist1 = SingleLinkedList()
+    slist1 = SinglyLinkedList()
     slist1.creat_by_insert_tail([x for x in range(3)][::-1])
-    slist2 = SingleLinkedList()
+    slist2 = SinglyLinkedList()
     slist2.creat_by_insert_tail([5, 4, 3])
     slist2.get_last_node().next = slist1.head
-    print(SingleLinkedList.is_intersect(slist1, slist2))
-    print(SingleLinkedList.is_intersect_on(slist1, slist2))
+    print(SinglyLinkedList.is_intersect(slist1, slist2))
+    print(SinglyLinkedList.is_intersect_on(slist1, slist2))
