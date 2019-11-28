@@ -6,6 +6,7 @@ class Empty(Exception):
 
 
 class ArrayDeque(ArrayQueue):
+    """Circularly array deque."""
     def __init__(self, capacity=10):
         super().__init__(capacity)
 

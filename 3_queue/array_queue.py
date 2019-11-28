@@ -3,6 +3,7 @@ class Empty(Exception):
 
 
 class ArrayQueue:
+    """Circularly array queue."""
     def __init__(self, capacity=10):
         self.capacity = capacity
         self._data = [None] * capacity
