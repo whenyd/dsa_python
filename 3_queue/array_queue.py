@@ -8,7 +8,6 @@ class ArrayQueue:
         self._data = [None] * capacity
         self._size = 0
         self._front = 0
-        self._back = 0
 
     def __len__(self):
         return self._size
@@ -46,13 +45,11 @@ class ArrayQueue:
         if self.is_full():
             self._resize(self.capacity * 2)
 
-        self._data[self._back] = e
+        # back是队尾的空位置
+        # 它在front的位置向前size, 而循环队列需要对capacity取余数
+        back = (self._front + self._size) % self.capacity
+        self._data[back] = e
         self._size += 1
-
-        # back 是在front的位置向前 size, 而循环队列需要对 capacity 取余数
-        # self._back = (self._front + self._size) % self.capacity
-        # 更简单的 back 计算
-        self._back = (self._back + 1) % self.capacity
 
     def _resize(self, cap):
         data = self._data
@@ -65,7 +62,6 @@ class ArrayQueue:
             walk = (walk + 1) % len(data)
 
         self._front = 0
-        self._back = self._front + self._size
 
 
 if __name__ == '__main__':
