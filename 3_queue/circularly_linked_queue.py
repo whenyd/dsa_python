@@ -1,16 +1,8 @@
-class Empty(Exception):
-    pass
+from base.exception import EmptyError
+from base.node import SinglyNode
 
 
 class CircularlyLinkedQueue:
-
-    class _Node:
-        __slots__ = '_element', '_next'
-
-        def __init__(self, element, next):
-            self._element = element
-            self._next = next
-
     def __init__(self):
         self._tail = None
         self._size = 0
@@ -23,13 +15,13 @@ class CircularlyLinkedQueue:
 
     def first(self):
         if self.is_empty():
-            raise Empty('Stack is empty')
+            raise EmptyError('Stack is empty')
 
         return self._tail._next._element
 
     def dequeue(self):
         if self.is_empty():
-            raise Empty('Stack is empty')
+            raise EmptyError('Stack is empty')
 
         old_head = self._tail._next
         if self._size == 1:
@@ -42,7 +34,7 @@ class CircularlyLinkedQueue:
         return old_head._element
 
     def enqueue(self, e):
-        node = self._Node(e, None)
+        node = SinglyNode(e, None)
 
         if self.is_empty():
             node._next = node

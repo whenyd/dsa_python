@@ -1,8 +1,5 @@
 from array_queue import ArrayQueue
-
-
-class Empty(Exception):
-    pass
+from base.exception import EmptyError
 
 
 class ArrayDeque(ArrayQueue):
@@ -18,7 +15,7 @@ class ArrayDeque(ArrayQueue):
 
     def last(self):
         if self.is_empty():
-            raise Empty('Queue is empty')
+            raise EmptyError('Queue is empty')
 
         # 最后一个数据保的位置, 比队尾空位置提前一个索引
         last_idx = (self._front + self._size - 1) % self.capacity
@@ -34,7 +31,7 @@ class ArrayDeque(ArrayQueue):
 
     def delete_last(self):
         if self.is_empty():
-            raise Empty('Queue is empty')
+            raise EmptyError('Queue is empty')
 
         last_idx = (self._front + self._size - 1) % self.capacity
         item = self._data[last_idx]

@@ -1,5 +1,4 @@
-class Empty(Exception):
-    pass
+from base.exception import EmptyError
 
 
 class ArrayStack:
@@ -17,10 +16,10 @@ class ArrayStack:
 
     def pop(self):
         if self.is_empty():
-            raise Empty('Stack is empty.')
+            raise EmptyError('Stack is empty.')
         return self._data.pop()
 
     def top(self):
         if self.is_empty():
-            raise Empty('Stack is empty.')
+            raise EmptyError('Stack is empty.')
         return self._data[-1]

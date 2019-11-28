@@ -1,5 +1,4 @@
-class Empty(Exception):
-    pass
+from base.exception import EmptyError
 
 
 class ArrayQueue:
@@ -25,12 +24,12 @@ class ArrayQueue:
         Raise Empty exception if the queue is empty.
         """
         if self.is_empty():
-            raise Empty('Queue is empty')
+            raise EmptyError('Queue is empty')
         return self._data[self._front]
 
     def dequeue(self):
         if self.is_empty():
-            raise Empty('Queue is empty')
+            raise EmptyError('Queue is empty')
 
         item = self._data[self._front]
         self._data[self._front] = None

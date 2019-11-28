@@ -1,16 +1,8 @@
-class Empty(Exception):
-    pass
+from base.exception import EmptyError
+from base.node import SinglyNode
 
 
 class SinglyLinkedQueue:
-
-    class _Node:
-        __slots__ = '_element', '_next'
-
-        def __init__(self, element, next):
-            self._element = element
-            self._next = next
-
     def __init__(self):
         self._front = None
         self._back = None
@@ -24,12 +16,12 @@ class SinglyLinkedQueue:
 
     def first(self):
         if self.is_empty():
-            raise Empty('Stack is empty')
+            raise EmptyError('Stack is empty')
 
         return self._front._element
 
     def enqueue(self, e):
-        node = self._Node(e, None)
+        node = SinglyNode(e, None)
 
         if self._front is None:
             self._front = node
@@ -41,7 +33,7 @@ class SinglyLinkedQueue:
 
     def dequeue(self):
         if self.is_empty():
-            raise Empty('Stack is empty')
+            raise EmptyError('Stack is empty')
 
         item = self._front._element
         self._front = self._front._next
