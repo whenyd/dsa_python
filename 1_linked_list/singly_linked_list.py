@@ -17,7 +17,7 @@ class SinglyLinkedList:
     def creat_by_insert_head(self, item_iter):
         """头插法建立链表, 新结点始终插入到链表头部."""
         for item in item_iter:
-            self.insert_to_head(item)
+            self.insert_first(item)
 
     def creat_by_insert_tail(self, item_iter):
         """尾插法建立链表, 新结点始终插入到链表尾部."""
@@ -39,13 +39,14 @@ class SinglyLinkedList:
     #         tail.next = node  # 新结点加入尾部
     #         tail = node  # tail指向新结点
 
-    def insert_to_head(self, item=None):
+    def insert_first(self, item=None):
         node = Node(item, self.head)  # 新结点next指向当前head
         self.head = node  # 移动head到新结点
 
-    # def insert_to_tail(self, item):
-    #     node = Node(item)
-    #     self.tail.next = node
+    def insert_last(self, item):
+        node = Node(item)
+        self.tail.next = node
+        self.tail = node
 
     def insert_after(self, node, item):
         if node is None or self.head is None:
@@ -60,7 +61,7 @@ class SinglyLinkedList:
             return
 
         if node == self.head:
-            self.insert_to_head(item)
+            self.insert_first(item)
 
         new_node = Node(item)
 
