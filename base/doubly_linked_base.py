@@ -1,7 +1,7 @@
 from base.node import DoublyNode
 
 
-class _DoublyLinkedBase:
+class DoublyLinkedBase:
 
     def __init__(self):
         self._header = DoublyNode()
