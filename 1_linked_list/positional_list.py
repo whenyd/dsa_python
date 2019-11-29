@@ -101,3 +101,34 @@ class PositionalList(_DoublyLinkedBase):
         old_value = original._element
         original._element = e
         return old_value
+
+
+def insertion_sort(link):
+    if len(link) < 2:
+        return link
+
+    marker = link.first()
+    while marker != link.last():
+        pivot = link.after(marker)
+        value = pivot.element()
+
+        if value > marker.element():
+            marker = pivot
+        else:
+            walk = marker
+            while walk != link.first() and value < link.before(walk).element():
+                walk = link.before(walk)
+            link.delete(pivot)
+            link.add_before(walk, value)
+
+
+if __name__ == '__main__':
+    arr = [3, 44, 38, 5, 47, 15, 36, 26, 27, 2, 46, 4, 19, 50, 48]
+    link = PositionalList()
+    for i in arr:
+        link.add_last(i)
+
+    insertion_sort(link)
+
+    for i in link:
+        print(i)
