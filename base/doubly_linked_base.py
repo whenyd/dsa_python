@@ -1,11 +1,11 @@
-from node import DoublyNode
+from base.node import DoublyNode
 
 
 class _DoublyLinkedBase:
 
     def __init__(self):
-        self._header = DoublyNode(None, None, None)
-        self._trailer = DoublyNode(None, None, None)
+        self._header = DoublyNode()
+        self._trailer = DoublyNode()
         self._header._next = self._trailer
         self._trailer._prev = self._header
         self._size = 0
@@ -17,7 +17,7 @@ class _DoublyLinkedBase:
         return self._size == 0
 
     def _insert_between(self, e, predecessor, successor):
-        node = self._Node(e, predecessor, successor)
+        node = DoublyNode(e, predecessor, successor)
         predecessor._next = node
         successor._prev = node
         self._size += 1

@@ -34,7 +34,7 @@ class CircularlyLinkedQueue:
         return old_head._element
 
     def enqueue(self, e):
-        node = SinglyNode(e, None)
+        node = SinglyNode(e)
 
         if self.is_empty():
             node._next = node
