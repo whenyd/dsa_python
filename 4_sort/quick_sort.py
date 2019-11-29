@@ -38,6 +38,8 @@ def partition(arr, low, high):
         if arr[i] < pivot:
             arr[i], arr[store_index] = arr[store_index], arr[i]
             store_index += 1
+
+    # 交换pivot和store_index-1的值, 使得pivot之前的元素小于等于pivot
     arr[low], arr[store_index - 1] = arr[store_index - 1], arr[low]
 
     return store_index - 1
@@ -46,5 +48,5 @@ def partition(arr, low, high):
 if __name__ == '__main__':
     # arr = [3, 44, 38, 5, 47, 15, 36, 26, 27, 2, 46, 4, 19, 50, 48]
     arr = [5, 9, 1, 11, 6, 7, 2, 4]
-    _quick_sort(arr)
-    print(_quick_sort(arr))
+    quick_sort(arr)
+    print(arr)
