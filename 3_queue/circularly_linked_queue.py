@@ -1,5 +1,5 @@
 from base.exception import EmptyError
-from base.node import SinglyNode
+from base.node import _SinglyNode
 
 
 class CircularlyLinkedQueue:
@@ -34,7 +34,7 @@ class CircularlyLinkedQueue:
         return old_head._element
 
     def enqueue(self, e):
-        node = SinglyNode(e)
+        node = _SinglyNode(e)
 
         if self.is_empty():
             node._next = node

@@ -1,8 +1,8 @@
-from base.doubly_linked_base import DoublyLinkedBase
+from base.doubly_linked_base import _DoublyLinkedBase
 from base.exception import EmptyError
 
 
-class DoublyLinkedDeque(DoublyLinkedBase):
+class DoublyLinkedDeque(_DoublyLinkedBase):
     def first(self):
         if self.is_empty():
             raise EmptyError("Deque is empty")

@@ -1,5 +1,5 @@
 from base.exception import EmptyError
-from base.node import SinglyNode
+from base.node import _SinglyNode
 
 
 class SinglyLinkedStack:
@@ -14,7 +14,7 @@ class SinglyLinkedStack:
         return self._size == 0
 
     def push(self, e):
-        self._top = SinglyNode(e, self._top)
+        self._top = _SinglyNode(e, self._top)
         self._size += 1
 
     def top(self):

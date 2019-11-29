@@ -1,5 +1,5 @@
 from base.exception import EmptyError
-from base.node import SinglyNode
+from base.node import _SinglyNode
 
 
 class SinglyLinkedQueue:
@@ -21,7 +21,7 @@ class SinglyLinkedQueue:
         return self._front._element
 
     def enqueue(self, e):
-        node = SinglyNode(e, None)
+        node = _SinglyNode(e, None)
 
         if self._front is None:
             self._front = node
