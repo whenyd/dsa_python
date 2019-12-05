@@ -1,6 +1,7 @@
 """
 Abstract base class of tree ADT.
 """
+from abc import ABC
 
 
 class Tree:
@@ -83,3 +84,38 @@ class Tree:
         if p is None:
             p = self.root()
         return self._height2(p)
+
+
+class BinaryTree(Tree, ABC):
+
+    def left(self, p):
+        """Return the position that represents the left child of p,
+        or None if p has no left child.
+        """
+        raise NotImplementedError('must be implemented by subclass')
+
+    def right(self, p):
+        """Return the position that represents the left child of p,
+        or None if p has no left child.
+        """
+        raise NotImplementedError('must be implemented by subclass')
+
+    def sibling(self, p):
+        """Return the position that represents the sibling of p,
+        or None if p has no sibling.
+        """
+        parent = self.parent(p)
+        if parent is None:
+            return None
+
+        if p == self.left(parent):
+            return self.right(parent)
+        else:
+            return self.left(parent)
+
+    def children(self, p):
+        if self.left(p) is not None:
+            yield self.left(p)
+
+        if self.right(p) is not None:
+            yield self.right(p)
