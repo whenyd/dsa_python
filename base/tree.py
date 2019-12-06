@@ -38,11 +38,15 @@ class Tree:
 
     def positions(self):
         """Generate an iteration of all positions of tree T."""
-        raise NotImplementedError('must be implemented by subclass')
+        return self.preorder()
 
     def __len__(self):
         """Return the total number of elements in the tree."""
         raise NotImplementedError('must be implemented by subclass')
+
+    def __iter__(self):
+        for p in self.positions():
+            yield p.element()
 
     def is_root(self, p):
         return self.root() == p
@@ -85,6 +89,60 @@ class Tree:
             p = self.root()
         return self._height2(p)
 
+    def preorder(self):
+        """
+        Algorithm preorder(T, p):
+            perform the “visit” action for position p
+            for each child c in T.children(p) do
+                preorder(T, c)
+        """
+        if not self.is_empty():
+            yield from self._subtree_preorder(self.root())
+            # for p in self._subtree_preorder(self.root()):
+            #     yield p
+
+    def _subtree_preorder(self, p):
+        yield p
+        for c in self.children(p):
+            yield from self._subtree_preorder(c)
+            # for other in self._subtree_preorder(c):
+            #     yield other
+
+    def postorder(self):
+        """
+        Algorithm postorder(T, p):
+            for each child c in T.children(p) do
+                preorder(T, c)
+            perform the “visit” action for position p
+        """
+        if not self.is_empty():
+            yield from self._subtree_postorder(self.root())
+
+    def _subtree_postorder(self, p):
+        for c in self.children(p):
+            yield from self._subtree_postorder(c)
+        yield p
+
+    def breadth_first(self):
+        """
+        Algorithm breadthfirst(T):
+            Initialize queue Q to contain T.root( )
+            while Q not empty do
+                p = Q.dequeue( )  {p is the oldest entry in the queue}
+                perform the “visit” action for position p
+                for each child c in T.children(p) do
+                    Q.enqueue(c)  {add p’s children to the end of the queue for later visits}
+        """
+        if self.is_empty():
+            return
+
+        queue = [self.root()]  # 实际可以用queue.Queue()或SinglyLinkedQueue
+        while len(queue) > 0:
+            p = queue.pop(0)
+            yield p
+            for c in self.children(p):
+                queue.append(c)
+
 
 class BinaryTree(Tree, ABC):
 
@@ -119,3 +177,27 @@ class BinaryTree(Tree, ABC):
 
         if self.right(p) is not None:
             yield self.right(p)
+
+    def inorder(self):
+        """
+        Algorithm inorder(p):
+            if p has a left child lc then
+                inorder(lc) {recursively traverse the left subtree of p}
+            perform the “visit” action for position p
+            if p has a right child rc then
+                inorder(rc) {recursively traverse the right subtree of p}
+        """
+        if not self.is_empty():
+            yield from self._subtree_inorder(self.root())
+
+    def _subtree_inorder(self, p):
+        left = self.left(p)
+        if left is not None:
+            yield from self._subtree_inorder(left)
+        yield p
+        right = self.right(p)
+        if right is not None:
+            yield from self._subtree_inorder(right)
+
+    def positions(self):
+        return self.inorder()

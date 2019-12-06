@@ -156,3 +156,28 @@ class LinkedBinaryTree(BinaryTree):
             node._right = t2._root
             t2._root = None
             t2._size = 0
+
+
+if __name__ == '__main__':
+    bt = LinkedBinaryTree()
+    bt._add_root(1)
+    bt._add_left(bt.root(), 2)
+    bt._add_right(bt.root(), 3)
+    bt._add_left(bt.left(bt.root()), 4)
+    bt._add_right(bt.left(bt.root()), 5)
+    bt._add_left(bt.right(bt.root()), 6)
+
+    # for p in bt.preorder():
+    #     print(p.element())
+    #
+    # print()
+    # for p in bt.postorder():
+    #     print(p.element())
+    #
+    # print()
+    # pos = bt.positions()
+    # for p in pos:
+    #     print(p.element())
+
+    for p in bt.inorder():
+        print(p.element())
